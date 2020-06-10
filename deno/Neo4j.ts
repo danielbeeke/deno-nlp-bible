@@ -1,30 +1,18 @@
 interface Neo4jSettings {
-    discoverUrl: string,
-    database: string,
+    url: string,
     user: string,
     password: string
 }
 
-interface Neo4jDiscovery {
-    bolt_routing: string,
-    transaction: string,
-    bolt_direct: string,
-    data: string,
-    neo4j_version: string,
-    neo4j_edition: string
-}
-
 export class Neo4j {
     settings: Neo4jSettings;
-    discovery: Neo4jDiscovery;
 
-    constructor(settings: Neo4jSettings, discovery: Neo4jDiscovery) {
+    constructor(settings: Neo4jSettings) {
         this.settings = settings;
-        this.discovery = discovery;
     }
 
-    async query (query: string, parameters: any = {}) {
-        const url: string = this.discovery.data + 'transaction/commit';
+    public async query (query: string, parameters: any = {}) {
+        const url: string = this.settings.url + '/transaction/commit';
 
         try {
             const response = await fetch(url, {
@@ -48,12 +36,4 @@ export class Neo4j {
             console.log(exception)
         }
     }
-}
-
-export async function initNeo4j (settings: Neo4jSettings): Promise<Neo4j> {
-    const response = await fetch(settings.discoverUrl, {
-        headers: { Accept: 'application/json' }
-    });
-    const discovery: any = await response.json();
-    return new Neo4j(settings, discovery);
 }

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://deno.land/x/denon/schema.json",
+  "scripts": {
+    "start": {
+      "cmd": "deno run deno/Index.ts"
+    }
+  },
+  "allow": {
+    "read": true,
+    "env": true,
+    "net": true,
+    "write": true
+  },
+  "unstable": true,
+  "watcher": {
+    "exts": ["js", "ts", "json"],
+    "match": ["deno/*.*"]
+  }
+}
+

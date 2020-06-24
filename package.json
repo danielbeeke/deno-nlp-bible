@@ -2,7 +2,7 @@
   "name": "vite",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite --root=frontend & denon run --allow-all deno/Index.ts",
+    "dev": "vite --root=frontend & denon start",
     "build": "vite build"
   },
   "dependencies": {
